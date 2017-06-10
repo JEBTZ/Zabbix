@@ -1,0 +1,13 @@
+---
+- name: instalando modulo python mysql
+  apt: name=python-mysqldb state=present
+- name: Añadir usuario a la base de datos
+  mysql_user: name=zabbix
+              host=localhost
+              password=zabbix
+              priv=*.*:ALL,GRANT
+              login_user=root
+              login_password=
+- name: Añadiendo bases de datos
+  mysql_db: name=zabbix
+            state=present

@@ -1,0 +1,18 @@
+---
+- name: instalando mysql
+  apt: name=zabbix-server-mysql state=present
+
+- name: Descargando el paquete zabbix
+  get_url: 
+    url="http://repo.zabbix.com/zabbix/3.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.2-1+trusty_all.deb"
+    dest="/tmp/zabbix.deb"
+
+- name: Instalando el paquete zabbix
+  apt: deb="/tmp/zabbix.deb"
+  sudo: true
+
+- name: Update packages list
+  apt: update_cache=yes
+
+- name: instalando frontend zabbix
+  apt: name=zabbix-frontend-php state=present
